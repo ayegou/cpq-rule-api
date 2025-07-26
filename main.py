@@ -37,5 +37,9 @@ def evaluate_rule(req: RuleRequest):
     }
 
     r = requests.post("https://emkc.org/api/v2/piston/execute", json=piston_payload)
-    output = r.json().get("run", {}).get("stdout", "").strip()
-    return {"result": output}
+    resp = r.json()
+    return {
+    "code_sent": code,
+    "piston_raw": resp
+    }
+

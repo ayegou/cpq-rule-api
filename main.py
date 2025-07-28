@@ -13,7 +13,7 @@ def evaluate_rule(req: RuleRequest):
     def convert_expr(expr):
         expr = re.sub(r'"([^"]*)"\|', r'"\1"', expr)
         expr = re.sub(r'\bNot\s*\(', 'not(', expr, flags=re.IGNORECASE)
-        expr = re.sub(r'\b([a-zA-Z_]+)-([a-zA-Z_]+)\b', r'\1_\2', expr)
+        expr = expr.replace('-', '_')
         expr = expr.replace('<>', '!=')
         expr = re.sub(r'(?<![<>=!])=(?!=)', '==', expr)
         expr = re.sub(r'"(\d+(\.\d+)?)"', r'\1', expr)

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import re, requests
+import re, requests, json
 
 app = FastAPI()
 
@@ -40,6 +40,7 @@ def evaluate_rule(req: RuleRequest):
     resp = r.json()
     return {
     "code_sent": code,
+    "original_rule_escaped": json.dumps(req.rule),
     "piston_raw": resp
     }
     
